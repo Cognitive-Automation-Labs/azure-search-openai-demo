@@ -19,7 +19,7 @@ from lookuptool import CsvLookupTool
 class ReadRetrieveReadApproach(Approach):
 
     template_prefix = \
-"You are an intelligent assistant helping Cognitive Automation Labs employees with their healthcare plan questions and employee handbook questions. " \
+"You are an intelligent assistant helping Cognitive Automation Labs employees with understanding policy information. " \
 "Answer the question using only the data provided in the information sources below. " \
 "For tabular information return it as an html table. Do not return markdown format. " \
 "Each source has a name followed by colon and the actual data, quote the source name for each piece of data you use in the response. " \
@@ -37,7 +37,7 @@ Question: {input}
 
 Thought: {agent_scratchpad}"""    
 
-    CognitiveSearchToolDescription = "useful for searching the Microsoft employee benefits information such as healthcare plans, retirement plans, etc."
+    CognitiveSearchToolDescription = "useful for searching the Microsoft policy information such performance policies, etc."
 
     def __init__(self, search_client: SearchClient, openai_deployment: str, sourcepage_field: str, content_field: str):
         self.search_client = search_client
@@ -110,7 +110,7 @@ class EmployeeInfoTool(CsvLookupTool):
         super().__init__(filename="data/employeeinfo.csv", 
                          key_field="name", 
                          name="Employee", 
-                         description="useful for answering questions about the employee, their benefits and other personal information",
+                         description="useful for answering questions about the employee, and their related policies",
                          callbacks=callbacks)
         self.func = self.employee_info
         self.employee_name = employee_name
